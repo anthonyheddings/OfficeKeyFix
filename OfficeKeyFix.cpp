@@ -13,10 +13,13 @@ int main(int argc, wchar_t* argv[])
 	//Kill Explorer
 	system("taskkill /IM explorer.exe /F");
 
-	//Register hotkey
+	//Register hotkeys with modifiers and keys
 	for (int i = 0; i < 10; i++) {
 		RegisterHotKey(NULL, i, 0x1 + 0x2 + 0x4 + 0x8 | MOD_NOREPEAT, offendingKeys[i]);
 	}
+
+	//Register hotkey with only modifiers, no keys
+	RegisterHotKey(NULL, 10, 0x1 + 0x2 + 0x4 + 0x8 | MOD_NOREPEAT, NULL);
 
 	//Restart Explorer
 	system("start C:/Windows/explorer.exe");
@@ -27,7 +30,7 @@ int main(int argc, wchar_t* argv[])
 	std::this_thread::sleep_for(std::chrono::milliseconds(4000));
 	 
 	//deregister hotkeys by ID
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < 11; i++) {
 		UnregisterHotKey(NULL, i);
 	}
 
